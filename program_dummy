@@ -1,0 +1,118 @@
+local player =  game.Players.LocalPlayer
+local part = game.Workspace.Part
+local ChatService = game:GetService("Chat")
+local Head = game.Workspace.Dummy:WaitForChild("Head")
+local varArray = {}
+
+player.Chatted:Connect(function(msg)
+	if msg.sub(msg, 1, 7) == "/print " then
+		ChatService:Chat(Head, msg.sub(msg, 8))
+	end
+	if msg.sub(msg, 1, 7) == "/local " then
+		local splitProcess = msg.split(msg, " ")
+		local var = splitProcess[2].."_"..splitProcess[4]
+		table.insert(varArray, var)
+		ChatService:Chat(Head, "Successfully created variable "..splitProcess[2].." with a value of "..splitProcess[4])
+		print(varArray)
+	end
+	if msg.sub(msg, 1, 10) == "/printvar " then
+		local varInput = msg.sub(msg, 11)
+		for i, v in ipairs(varArray) do
+			local varOutput = v.split(v, "_")
+			if varInput == varOutput[1] then
+				ChatService:Chat(Head, varOutput[2])
+			end
+		end
+	end
+	if msg.sub(msg, 1, 11) == "/removevar " then
+		local varInput = msg.sub(msg, 12)
+		for i, v in ipairs(varArray) do
+			local varOutput = v.split(v, "_")
+			if varInput == varOutput[1] then
+				ChatService:Chat(Head, "Successfully removed variable "..varOutput[1].." with a value of "..varOutput[2])
+				table.remove(varArray, i)
+				print(varArray)
+			end
+		end
+	end
+	if msg.sub(msg, 1, 16) == "/changevarvalue " then
+		local splitProcess = msg.split(msg, " ")
+		local varInput = splitProcess[2]
+		local newValue = splitProcess[3]
+		for i, v in ipairs(varArray) do
+			local varOutput = v.split(v, "_")
+			local oldValue = varOutput[2]
+			if varInput == varOutput[1] then
+				ChatService:Chat(Head, "Successfully changed value of variable "..varInput.." from a value of "..oldValue.." to a value of "..newValue)
+				varArray[i] = varInput.."_"..newValue
+				print(varArray)
+			end
+		end
+	end
+	if msg.sub(msg, 1, 15) == "/changevarname " then
+		local splitProcess = msg.split(msg, " ")
+		local oldVar = splitProcess[2]
+		local newVar = splitProcess[3]
+		for i, v in ipairs(varArray) do
+			local var = v.split(v, "_")
+			local value = var[2]
+			if oldVar == var[1] then
+				ChatService:Chat(Head, "Successfuly changed name of variable "..oldVar.." to a name of "..newVar)
+				varArray[i] = newVar.."_"..value
+				print(varArray)
+			end
+		end
+	end
+	if msg.sub(msg, 1, 5) == '/move' then
+		local splitProcess = msg.split(msg, " ")
+		part.Position = Vector3.new(part.Position.X + tonumber(splitProcess[2]), part.Position.Y, part.Position.Z + tonumber(splitProcess[3]))
+		ChatService:Chat(Head, "Moving to part...")
+		Head.Parent.Humanoid:MoveTo(part.Position)
+		ChatService:Chat(Head, "Successfully moved to part.")
+	end
+	if msg.sub(msg, 1, 11) == "/spawnpart " then
+		local splitProcess = msg.split(msg, " ")
+		local part = Instance.new("Part", workspace)
+		part.Name = splitProcess[4]
+		part.Position = Vector3.new(part.Position.X + tonumber(splitProcess[2]), part.Position.Y, part.Position.Z + tonumber(splitProcess[3]))
+		ChatService:Chat(Head, "Successfully spawned part.")
+	end
+	if msg.sub(msg, 1, 10) == "/editpart " then
+		local splitProcess = msg.split(msg, " ")
+		local part = splitProcess[2]
+		local property = splitProcess[3]
+		
+		if property == "brickcolor" then
+			if #splitProcess == 4 then
+				local edit = splitProcess[4]
+				workspace:FindFirstChild(part).BrickColor = BrickColor.new(edit)
+			elseif #splitProcess == 5 then
+				local edit = splitProcess[4].." "..splitProcess[5]
+				workspace:FindFirstChild(part).BrickColor = BrickColor.new(edit)
+			elseif #splitProcess == 6 then
+				local edit = splitProcess[4].." "..splitProcess[5].." "..splitProcess[6]
+				workspace:FindFirstChild(part).BrickColor = BrickColor.new(edit)
+			end
+		end
+		if property == "name" then
+			local edit = splitProcess[4]
+			workspace:FindFirstChild(part).Name = edit
+		end
+		if property == "transparency" then
+			local edit = tonumber(splitProcess[4])
+			workspace:FindFirstChild(part).Transparency = edit
+		end
+		if property == "shape" then
+			local edit = splitProcess[4]
+			workspace:FindFirstChild(part).Shape = edit
+		end
+		if property == "material" then
+			local edit = splitProcess[4]
+			workspace:FindFirstChild(part).Material = edit
+		end
+	end
+	if msg.sub(msg, 1, 12) == "/removepart " then
+		local splitProcess = msg.split(msg, " ")
+		workspace:FindFirstChild(splitProcess[2]):Destroy()
+	end
+end)
