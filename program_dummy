@@ -66,9 +66,7 @@ player.Chatted:Connect(function(msg)
 	if msg.sub(msg, 1, 5) == '/move' then
 		local splitProcess = msg.split(msg, " ")
 		part.Position = Vector3.new(part.Position.X + tonumber(splitProcess[2]), part.Position.Y, part.Position.Z + tonumber(splitProcess[3]))
-		ChatService:Chat(Head, "Moving to part...")
 		Head.Parent.Humanoid:MoveTo(part.Position)
-		ChatService:Chat(Head, "Successfully moved to part.")
 	end
 	if msg.sub(msg, 1, 11) == "/spawnpart " then
 		local splitProcess = msg.split(msg, " ")
