@@ -1,0 +1,218 @@
+game.Players.PlayerAdded:Connect(function(player)
+	local first_value = {}
+	local second_value = {}
+	local first_value_done = 0
+	local operation_done = 0
+	local operation_can_be_made = 0
+	local operation = ""
+
+	local add = workspace.Buttons:WaitForChild("add")
+	local calculate = workspace.Buttons:WaitForChild("calculate")
+	local decimal = workspace.Buttons:WaitForChild("decimal")
+	local divide = workspace.Buttons:WaitForChild("divide")
+	local eight = workspace.Buttons:WaitForChild("eight")
+	local five = workspace.Buttons:WaitForChild("five")
+	local four = workspace.Buttons:WaitForChild("four")
+	local six = workspace.Buttons:WaitForChild("six")
+	local multiply = workspace.Buttons:WaitForChild("multiply")
+	local nine = workspace.Buttons:WaitForChild("nine")
+	local one = workspace.Buttons:WaitForChild("one")
+	local seven = workspace.Buttons:WaitForChild("seven")
+	local subtract = workspace.Buttons:WaitForChild("subtract")
+	local subtract = workspace.Buttons:WaitForChild("subtract")
+	local two = workspace.Buttons:WaitForChild("two")
+	local zero = workspace.Buttons:WaitForChild("zero")
+	local three = workspace.Buttons:WaitForChild("three")
+
+	seven.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, "7")
+			operation_can_be_made = 1
+			print(first_value)
+		elseif first_value_done == 1 and operation_done == 1 then 
+			table.insert(second_value, "7")
+			print(second_value)
+		end
+	end)
+
+	eight.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, "8")
+			operation_can_be_made = 1
+			print(first_value)
+		elseif first_value_done == 1 and operation_done == 1 then 
+			table.insert(second_value, "8")
+			print(second_value)
+		end
+	end)
+
+	nine.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, "9")
+			operation_can_be_made = 1
+			print(first_value)
+		elseif first_value_done == 1 and operation_done == 1 then 
+			table.insert(second_value, "9")
+			print(second_value)
+		end
+	end)
+
+	four.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, "4")
+			operation_can_be_made = 1
+			print(first_value)
+		elseif first_value_done == 1 and operation_done == 1 then 
+			table.insert(second_value, "4")
+			print(second_value)
+		end
+	end)
+
+	five.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, "5")
+			operation_can_be_made = 1
+			print(first_value)
+		elseif first_value_done == 1 and operation_done == 1 then 
+			table.insert(second_value, "7")
+			print(second_value)
+		end
+	end)
+
+	six.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, "6")
+			operation_can_be_made = 1
+			print(first_value)
+		elseif first_value_done == 1 and operation_done == 1 then 
+			table.insert(second_value, "6")
+			print(second_value)
+		end
+	end)
+
+	one.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, "1")
+			operation_can_be_made = 1
+			print(first_value)
+		elseif first_value_done == 1 and operation_done == 1 then 
+			table.insert(second_value, "1")
+			print(second_value)
+		end
+	end)
+
+	two.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, "2")
+			operation_can_be_made = 1
+			print(first_value)
+		elseif first_value_done == 1 and operation_done == 1 then 
+			table.insert(second_value, "2")
+			print(second_value)
+		end
+	end)
+
+	three.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, "3")
+			operation_can_be_made = 1
+			print(first_value)
+		elseif first_value_done == 1 and operation_done == 1 then 
+			table.insert(second_value, "3")
+			print(second_value)
+		end
+	end)
+
+	zero.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, "0")
+			if "0" == first_value[1] then
+				table.remove(first_value, 1)
+				print(first_value)
+			else
+				operation_can_be_made = 1
+				print(first_value)
+			end
+		elseif first_value_done == 1 and operation_done == 1 then 
+			table.insert(second_value, "7")
+			if "0" == first_value[1] then
+				table.insert(second_value, "7")
+				print(second_value)
+			else
+				print(second_value)
+			end
+		end
+	end)
+
+	decimal.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_done == 0 then
+			table.insert(first_value, ".")
+			operation_can_be_made = 1
+			print(first_value)
+		elseif first_value_done == 1 and operation_done == 1 then
+			table.insert(second_value, ".")
+			print(second_value)
+		end 
+	end)
+
+	add.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_can_be_made == 1 then
+			operation = "add"
+			first_value_done = 1
+			operation_done = 1
+			print(operation)
+		end
+	end)
+
+	subtract.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_can_be_made == 1 then
+			operation = "subtract"
+			first_value_done = 1
+			operation_done = 1
+			print(operation)
+		end
+	end)
+
+	multiply.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_can_be_made == 1 then
+			operation = "multiply"
+			first_value_done = 1
+			operation_done = 1
+			print(operation)
+		end
+	end)
+
+	divide.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 0 and operation_can_be_made == 1 then
+			operation = "divide"
+			first_value_done = 1
+			operation_done = 1
+			print(operation)
+		end
+	end)
+
+	calculate.ClickDetector.MouseClick:Connect(function()
+		if first_value_done == 1 and operation_done == 1 then
+			local first = tonumber(table.concat(first_value, ""))
+			local second = tonumber(table.concat(second_value, ""))
+			if operation == "add" then
+				local answer = first + second
+				print(first.." + "..second.." = "..answer)
+			end
+			if operation == "subtract" then
+				local answer = first - second
+				print(first.." - "..second.." = "..answer)
+			end
+			if operation == "multiply" then
+				local answer = first * second
+				print(first.." * "..second.." = "..answer)
+			end
+			if operation == "divide" then
+				local answer = first / second
+				print(first.." / "..second.." = "..answer)
+			end
+			wait(5)
+			player:Kick("Attempting to find a solution to restart the calculator, that's why this kick is here")
+		end
+	end)
+end)
